@@ -10,7 +10,7 @@ function Exercises() {
   
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">
         Exercise Library
       </h1>
       {Object.entries(exercise.exercises).map(([muscleGroup, exercisearray]) => (
@@ -24,7 +24,7 @@ function Exercises() {
                     alt={ex.name} 
                     className="w-full h-48 object-cover"
                   />
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
+                  <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-purple-600 text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
                     {muscleGroup}
                   </div>
                 </div>
