@@ -13,10 +13,11 @@ function Exercises() {
       <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent">
         Exercise Library
       </h1>
+
       {Object.entries(exercise.exercises).map(([muscleGroup, exercisearray]) => (
         <div key={muscleGroup} className="mb-8">
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {exercisearray.map((ex) => (
+            {exercisearray.flatMap((ex) => (
               <li key={ex.id} className="bg-white shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-100 flex flex-col">
                 <div className="relative">
                   <img 

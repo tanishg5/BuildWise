@@ -11,14 +11,35 @@ function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          {/* <div className="flex-shrink-0">
             <img
               onClick={() => navigate("/")}
               className="h-16 md:h-24 w-auto cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-lg"
               src={logo}
               alt="Logo"
             />
-          </div>
+          </div> */}
+
+          {/* Logo */}
+<div className="flex-shrink-0 flex items-center">
+  <button
+    onClick={() => navigate("/")}
+    className="focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
+    aria-label="Go to homepage"
+  >
+    <img
+      className="h-14 md:h-20 w-auto cursor-pointer drop-shadow-sm hover:drop-shadow-md"
+      src={logo}
+      alt="Company Logo"
+    />
+  </button>
+  {/* Optional: Add text logo alongside the image */}
+  <span 
+    className="ml-3 text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-700 to-indigo-400 bg-clip-text text-transparent hidden sm:block"
+  >
+    BuildWise
+  </span>
+</div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
