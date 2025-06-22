@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import ReactMarkdown from 'react-markdown'
-function DietPlan() {  
+import ReactMarkdown from 'react-markdown';
 
-  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY; // use REACT_APP_ prefix if using CRA
+function DietPlan() {  
+  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
   const genAI = new GoogleGenerativeAI(API_KEY);
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
@@ -13,7 +13,8 @@ function DietPlan() {
   const [activitylevel, setActivityLevel] = useState("Sedentary");
   const [goal, setGoal] = useState("Lose Weight");
   const [diet, setDiet] = useState("Non Vegetarian");
-  const [plan , getDietPlan] = useState("");
+  const [plan, setPlan] = useState("");
+
   
 
   const generateDietPlan = async ({ height, weight, age, gender, goal, activitylevel, diet }) => {
@@ -61,7 +62,7 @@ function DietPlan() {
       const result = await model.generateContent(prompt);
       const response = result.response;
       const dietPlan = response.text();
-      getDietPlan(dietPlan);
+      setPlan(dietPlan);
       return dietPlan;
     } catch (err) {
       console.error("Gemini Error:", err);
@@ -72,42 +73,41 @@ function DietPlan() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       const dietResponse = await generateDietPlan({ height, weight, age, gender, goal, activitylevel, diet });
-      getDietPlan(dietResponse);
+      setPlan(dietResponse);
     }
-    
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-purple-800 mb-4">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-600 mb-2">
             Personalized AI Diet Planner
           </h1>
-          <h2 className="text-xl text-gray-600">
-            Get a customized nutrition plan tailored to your goals, preferences,
-            and lifestyle
-          </h2>
+          <p className="text-lg text-gray-600">
+            Get a customized nutrition plan tailored to your goals
+          </p>
         </div>
 
         {/* Form Section */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="p-8">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+          <div className="p-6 sm:p-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-6">
               Enter Your Details
-            </h1>
+            </h2>
             
-            <form onSubmit={handleSubmit} >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Weight */}
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Weight (kg)
                   </label>
                   <input
                     onChange={(e) => setWeight(e.target.value)}
                     type="number"
                     value={weight}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter Your Weight"
                     required
                   />
@@ -115,14 +115,14 @@ function DietPlan() {
 
                 {/* Height */}
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Height (cm)
                   </label>
                   <input
                     onChange={(e) => setHeight(e.target.value)}
                     type="number"
                     value={height}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter Your Height"
                     required
                   />
@@ -130,14 +130,14 @@ function DietPlan() {
 
                 {/* Age */}
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Age
                   </label>
                   <input
                     onChange={(e) => setAge(e.target.value)}
                     type="number"
                     value={age}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter Your Age"
                     required
                   />
@@ -145,14 +145,14 @@ function DietPlan() {
 
                 {/* Gender */}
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Gender
                   </label>
                   <select
                     name="gender"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -161,14 +161,14 @@ function DietPlan() {
 
                 {/* Activity Level */}
                 <div className="md:col-span-2">
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Activity Level
                   </label>
                   <select
                     name="activity-level"
                     value={activitylevel}
                     onChange={(e) => setActivityLevel(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="Sedentary">Sedentary (Little/No Exercise)</option>
                     <option value="lightly">Light Active (1-3 days/week)</option>
@@ -180,14 +180,14 @@ function DietPlan() {
 
                 {/* Goal */}
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Goal
                   </label>
                   <select
                     name="weight"
                     value={goal}
                     onChange={(e) => setGoal(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="lose">Lose Weight</option>
                     <option value="gain">Gain Weight</option>
@@ -197,14 +197,14 @@ function DietPlan() {
 
                 {/* Diet Preference */}
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
                     Diet Preference
                   </label>
                   <select
                     name="diet"
                     value={diet}
                     onChange={(e) => setDiet(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="non-veg">Non Vegetarian</option>
                     <option value="veg">Vegetarian</option>
@@ -214,25 +214,34 @@ function DietPlan() {
               </div>
 
               {/* Submit Button */}
-              <div className="mt-8">
+              <div className="mt-6">
                 <button
                   type="submit"
-                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105"
+                  className="w-full bg-purple-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
                 >
-                  Calculate Your Plan
+                  Generate My Plan
                 </button>
               </div>
             </form>
           </div>
         </div>
+
+        {/* Results Section */}
+        {plan && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-purple-600 px-6 py-4">
+              <h2 className="text-xl font-semibold text-white">
+                Your Personalized Diet Plan
+              </h2>
+            </div>
+            <div className="p-6 sm:p-8">
+              <ReactMarkdown className="prose max-w-none">
+                {plan}
+              </ReactMarkdown>
+            </div>
+          </div>
+        )}
       </div>
-        { plan && (
-          <>
-          <div>Generate Diet Plan For You</div>
-           {plan}
-          </>
-        )
-        }
     </div>
   );
 }

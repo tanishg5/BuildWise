@@ -29,6 +29,7 @@ function App() {
        <Route path = '/foodanalysis' element={<FoodAnalysis/>}></Route>
        <Route path = '/createplan' element={<CreatePlan/>}></Route>
        <Route path = '/addexercise' element={<AddExercise/>}></Route>
+       <Route path = '/food' element={<FoodAnalysis/>}></Route>
       </Routes>
     </>
   )
